@@ -1,4 +1,30 @@
-source $(pwd)/src/scripts/common.sh
+AWS_COMMAND="aws"
+if [ -n "${AWS_ENDPOINT}" ];then
+  AWS_COMMAND="aws --endpoint ${AWS_ENDPOINT}"
+fi
+
+Common() {
+  LATEST_IP=$(wget -qO- http://checkip.amazonaws.com)
+  IP="${IP-$LATEST_IP}"
+  if [ -z "${IP}" ]; then
+    echo "Could not find your public IP"
+    exit 1
+  fi
+
+  if [ -z "${PARAM_GROUPID}" ]; then
+    GROUPID=$(${AWS_COMMAND} ec2 describe-security-groups \
+      --query "SecurityGroups[].[Tags[?Key==$(${PARAM_TAG_KEY})] | [0].Value, GroupId]" \
+      --output text | grep "${PARAM_TAG_VALUE}" | awk '{print $2}')
+    [[ -n "${GROUPID}" ]] || (echo "Could not determine Security Group ID" && exit 0);
+    PARAM_GROUPID=${GROUPID}
+  fi
+}
+
+ORB_TEST_ENV="bats-core"
+if [ "${0#*$ORB_TEST_ENV}" == "$0" ]; then
+  Common
+fi
+
 
 Add() {
   Common
@@ -9,9 +35,7 @@ Add() {
   echo "PARAM_GROUPID = ${PARAM_GROUPID}"
   echo "Allowing CircleCI to access port ${PARAM_PORT} from IP ${IP} to the security group ${PARAM_GROUPID}"
 
-  ${AWS_COMMAND} ec2 authorize-security-group-ingress --group-id "${PARAM_GROUPID}" --ip-permissions \
-    $(echo '[{"IpProtocol": "tcp", "FromPort": 443, "ToPort": 443, "IpRanges": [{"CidrIp": "", "Description": "CircleCI"}]}]' \
-      | jq -c '.[].IpRanges[].CidrIp="'${IP}/${PARAM_MASK}'"|.[].IpRanges[].Description="'${PARAM_DESC}'"|.[].FromPort='${PARAM_PORT}'|.[].ToPort='${PARAM_PORT}'')
+  ${AWS_COMMAND} ec2 authorize-security-group-ingress --group-id "${PARAM_GROUPID}" --ip-permissions 
 }
 
 ORB_TEST_ENV="bats-core"
