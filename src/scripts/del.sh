@@ -1,6 +1,4 @@
-# shellcheck disable=SC1091
-echo $(pwd)
-source "$(pwd)/src/scripts/common.sh"
+source "./common.sh"
 
 Del() {
   Common

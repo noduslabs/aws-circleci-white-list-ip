@@ -1,5 +1,4 @@
-# shellcheck disable=SC1091
-source "$(pwd)/src/scripts/common.sh"
+source "./common.sh"
 
 Add() {
   Common
