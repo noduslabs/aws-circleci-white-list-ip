@@ -1,6 +1,6 @@
 # Orb Project Template
 
-[![CircleCI Build Status](https://circleci.com/gh/noduslabs/aws-circleci-white-list-ip.svg?style=shield "CircleCI Build Status")](https://circleci.com/gh/noduslabs/aws-circleci-white-list-ip) [![CircleCI Orb Version](https://img.shields.io/badge/endpoint.svg?url=https://badges.circleci.io/orb/noduslabs/aws-circleci-white-list-ip)](https://circleci.com/orbs/registry/orb/noduslabs/aws-circleci-white-list-ip) [![GitHub License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/inokappa/aws-sg-white-list-circleci-ip/master/LICENSE) [![CircleCI Community](https://img.shields.io/badge/community-CircleCI%20Discuss-343434.svg)](https://discuss.circleci.com/c/ecosystem/orbs)
+[![CircleCI Build Status](https://circleci.com/gh/noduslabs/aws-circleci-white-list-ip.svg?style=shield "CircleCI Build Status")](https://circleci.com/gh/noduslabs/aws-circleci-whitelist) [![CircleCI Orb Version](https://img.shields.io/badge/endpoint.svg?url=https://badges.circleci.io/orb/noduslabs/aws-circleci-white-list-ip)](https://circleci.com/orbs/registry/orb/noduslabs/aws-circleci-whitelist) [![GitHub License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/inokappa/aws-sg-white-list-circleci-ip/master/LICENSE) [![CircleCI Community](https://img.shields.io/badge/community-CircleCI%20Discuss-343434.svg)](https://discuss.circleci.com/c/ecosystem/orbs)
 
 
 
@@ -20,6 +20,7 @@ Additional READMEs are available in each directory.
 We welcome [issues](https://github.com/noduslabs/aws-circleci-white-list-ip/issues) to and [pull requests](https://github.com/noduslabs/aws-circleci-white-list-ip/pulls) against this repository!
 
 ### How to Publish
+
 * Create and push a branch with your new features.
 * When ready to publish a new production version, create a Pull Request from _feature branch_ to `master`.
 * The title of the pull request must contain a special semver tag: `[semver:<segement>]` where `<segment>` is replaced by one of the following values.
