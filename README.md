@@ -1,6 +1,6 @@
 # Orb Project Template
 
-[![CircleCI Build Status](https://circleci.com/gh/noduslabs/aws-circleci-white-list-ip.svg?style=shield "CircleCI Build Status")](https://circleci.com/gh/noduslabs/aws-circleci-white-list-ip) [![CircleCI Orb Version](https://badges.circleci.com/orbs/noduslabs/aws-circleci-whitelist.svg)](https://circleci.com/orbs/registry/orb/noduslabs/aws-circleci-whitelist) [![GitHub License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/noduslabs/aws-circleci-white-list-ip/master/LICENSE) [![CircleCI Community](https://img.shields.io/badge/community-CircleCI%20Discuss-343434.svg)](https://discuss.circleci.com/c/ecosystem/orbs)
+[![CircleCI Build Status](https://circleci.com/gh/noduslabs/aws-circleci-white-list-ip.svg?style=shield "CircleCI Build Status")](https://circleci.com/gh/noduslabs/aws-circleci-white-list-ip) [![CircleCI Orb Version](https://img.shields.io/badge/endpoint.svg?url=https://badges.circleci.io/orb/noduslabs/aws-circleci-white-list-ip)](https://circleci.com/orbs/registry/orb/noduslabs/aws-circleci-white-list-ip) [![GitHub License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/inokappa/aws-sg-white-list-circleci-ip/master/LICENSE) [![CircleCI Community](https://img.shields.io/badge/community-CircleCI%20Discuss-343434.svg)](https://discuss.circleci.com/c/ecosystem/orbs)
 
 
 
@@ -12,7 +12,7 @@ Additional READMEs are available in each directory.
 
 ## Resources
 
-[CircleCI Orb Registry Page](https://circleci.com/orbs/registry/orb/noduslabs/aws-circleci-white-list-ip) - The official registry page of this orb for all versions, executors, commands, and jobs described.
+[CircleCI Orb Registry Page](https://circleci.com/orbs/registry/orb/noduslabs/aws-circleci-whitelist) - The official registry page of this orb for all versions, executors, commands, and jobs described.
 [CircleCI Orb Docs](https://circleci.com/docs/2.0/orb-intro/#section=configuration) - Docs for using and creating CircleCI Orbs.
 
 ### How to Contribute
@@ -22,7 +22,7 @@ We welcome [issues](https://github.com/noduslabs/aws-circleci-white-list-ip/issu
 ### How to Publish
 * Create and push a branch with your new features.
 * When ready to publish a new production version, create a Pull Request from _feature branch_ to `master`.
-* The title of the pull request must contain a special semver tag: `[semver:<segment>]` where `<segment>` is replaced by one of the following values.
+* The title of the pull request must contain a special semver tag: `[semver:<segement>]` where `<segment>` is replaced by one of the following values.
 
 | Increment | Description|
 | ----------| -----------|

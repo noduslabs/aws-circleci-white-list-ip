@@ -1,13 +1,37 @@
 description: >
-  Sample example description.
-# Provide a use-case based example for using this orb.
-# Everything in the `usage` section will be displayed in the orb registry.
-# Comments are not retained.
+  The usage of aws-sg-white-list-circleci-ip is as follows.
 usage:
   version: 2.1
   orbs:
-    <orb-name>: <namespace>/<orb-name>@1.2.3
+    aws-sg-white-list-circleci-ip: noduslabs/aws-circleci-whitelist@0.0.1
   workflows:
-    use-my-orb:
+    use-my-orb1:
       jobs:
-        - <orb-name>/<job-name>
+        - checkout
+        - aws-sg-white-list-circleci-ip/add
+        - aws-sg-white-list-circleci-ip/del
+    use-my-orb2:
+      jobs:
+        - checkout
+        - aws-sg-white-list-circleci-ip/add:
+            group-id: sg-xxxxxxxx
+        - aws-sg-white-list-circleci-ip/del:
+            group-id: sg-xxxxxxxx
+    use-my-orb3:
+      jobs:
+        - checkout
+        - aws-sg-white-list-circleci-ip/add:
+            tag-key: key
+            tag-value: value
+        - aws-sg-white-list-circleci-ip/del:
+            tag-key: key
+            tag-value: value
+    use-my-orb4:
+      jobs:
+        - checkout
+        - aws-sg-white-list-circleci-ip/add:
+            group-id: sg-xxxxxxxx
+            description: MyDescription
+        - aws-sg-white-list-circleci-ip/del:
+            group-id: sg-xxxxxxxx
+            description: MyDescription

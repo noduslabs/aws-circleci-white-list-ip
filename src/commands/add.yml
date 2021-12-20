@@ -1,0 +1,62 @@
+description: >-
+  This command will add a rule in the SG of the AWS Security Group to allow the
+  ingress of the CircleCI Machine
+parameters:
+  description:
+    description: Description to identify the rule. Spaces cannot be included.
+    type: string
+    default: CircleCI
+  port:
+    description: Port to open for the inbound rule.
+    type: integer
+    default: 443
+  mask:
+    description: Mask to use for the ip address.
+    type: integer
+    default: 32
+  group-id:
+    description: Specifies the ID of the security group.
+    type: string
+    default: ''
+  tag-key:
+    description: >-
+      This key should exist in the SG where we are going to add the rules.
+    type: string
+    default: developers
+  tag-value:
+    description: >-
+      This value should exist in the tag of the SG where we are going to add the
+      rules.
+    type: string
+    default: bastionaccess
+steps:
+  - aws-cli/install
+  - jq/install
+  - run:
+      name: Add CircleCI's IP address to the Security Group
+      command: |
+        AWS_COMMAND="aws"
+        if [ -n "${AWS_ENDPOINT}" ];then
+          AWS_COMMAND="aws --endpoint ${AWS_ENDPOINT}"
+        fi
+
+        LATEST_IP=$(wget -qO- http://checkip.amazonaws.com)
+        IP="${IP-$LATEST_IP}"
+        if [ -z "${IP}" ]; then
+          echo "Could not find your public IP"
+          exit 1
+        fi
+
+        PARAM_GROUPID=<< parameters.group-id >>
+        if [ -z "${PARAM_GROUPID}" ]; then
+          GROUPID=$(${AWS_COMMAND} ec2 describe-security-groups \
+            --query 'SecurityGroups[].[Tags[?Key==`<< parameters.tag-key >>`] | [0].Value, GroupId]' \
+            --output text | grep << parameters.tag-value >> | awk '{print $2}')
+          [[ -n "${GROUPID}" ]] || (echo "Could not determine Security Group ID" && exit 0);
+          PARAM_GROUPID=${GROUPID}
+        fi
+
+        ${AWS_COMMAND} ec2 authorize-security-group-ingress \
+          --group-id "${PARAM_GROUPID}" --ip-permissions \
+          $(echo '[{"IpProtocol": "tcp", "FromPort": 443, "ToPort": 443, "IpRanges": [{"CidrIp": "", "Description": ""}]}]' \
+            | jq -c '.[].IpRanges[].CidrIp="'${IP}/<< parameters.mask >>'"|.[].IpRanges[].Description="'<< parameters.description >>'"|.[].FromPort='<< parameters.port >>'|.[].ToPort='<< parameters.port >>'')
