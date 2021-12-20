@@ -1,3 +1,4 @@
+# shellcheck source=./common.sh
 source "$(pwd)/src/scripts/common.sh"
 
 Del() {
